@@ -4,12 +4,11 @@ namespace ServerTransfer;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
-use ServerTransfer\Main;
 
 class EventListener implements Listener {
 
     /** @var Main */
-    public $main;
+    public $plugin;
 
     public function __construct($plugin) {
         $this->plugin = $plugin;
