@@ -4,3 +4,11 @@ version: 1.0.0
 author: GamakCZ
 main: ServerTransfer\Main
 description: Simple Transfer plugin
+
+permissions:
+  st.transfer:
+    description: transfer to other servers
+    default: op
+  st.transfer.other: 
+    description: transferother players to other servers
+    default: op
