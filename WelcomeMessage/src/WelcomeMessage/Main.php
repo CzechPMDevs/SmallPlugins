@@ -1,6 +1,6 @@
 <?php
 
-namespace WelcomeMessages;
+namespace WelcomeMessage;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
