@@ -4,4 +4,6 @@ branches:
 projects:
   ServerTransfer:
     path: ServerTransfer/
+  WelcomeMessage:
+    path: WelcomeMesage/
 ...
