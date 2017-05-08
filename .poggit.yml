@@ -5,5 +5,5 @@ projects:
   ServerTransfer:
     path: ServerTransfer/
   WelcomeMessage:
-    path: WelcomeMesage/
+    path: WelcomeMessage/
 ...
