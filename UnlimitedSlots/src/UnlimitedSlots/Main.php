@@ -6,7 +6,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\server\QueryRegenerateEvent;
 use pocketmine\plugin\PluginBase;
 
-class UnlimitedSlots extends PluginBase implements Listener {
+class Main extends PluginBase implements Listener {
 
     public function onEnable() {
         $this->getServer()->getPluginManager()->registerEvents($this,$this);
