@@ -6,4 +6,6 @@ projects:
     path: ServerTransfer/
   WelcomeMessage:
     path: WelcomeMessage/
+  UnlimitedSlots:
+    path: UnlimitedSlots/
 ...
