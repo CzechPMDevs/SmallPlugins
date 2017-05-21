@@ -12,7 +12,7 @@ use pocketmine\plugin\PluginBase;
 class Main extends PluginBase implements Listener {
 
     // players
-    public $players;
+    public $players = [];
 
     public function onEnable() {
         $this->getServer()->getPluginManager()->registerEvents($this,$this);
