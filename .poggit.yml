@@ -8,4 +8,6 @@ projects:
     path: WelcomeMessage/
   UnlimitedSlots:
     path: UnlimitedSlots/
+  BlockInfo:
+    path: BlockInfo/
 ...
