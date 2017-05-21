@@ -6,3 +6,5 @@ Repository for small pmmp plugins
 - WelcomeMessage: https://poggit.pmmp.io/ci/CzechPMDevs/SmallPlugins/WelcomeMessage
 
 - UnlimitedSlots: https://poggit.pmmp.io/ci/CzechPMDevs/SmallPlugins/UnlimitedSlots
+
+- BlockInfo: https://poggit.pmmp.io/ci/CzechPMDevs/SmallPlugins/BlockInfo
