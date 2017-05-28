@@ -10,9 +10,8 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener {
-
-    // players
-    public $players = [];
+    
+    public $player;
 
     public function onEnable() {
         $this->getServer()->getPluginManager()->registerEvents($this,$this);
@@ -22,10 +21,7 @@ class Main extends PluginBase implements Listener {
         if($s instanceof Player && $s->isOp()) {
             if($cmd->getName() == "bi" && $args[0] == "add") {
                 $s->sendMessage("§aSucess.");
-                array_push($this->players, $s->getName());
-            }
-            elseif($cmd->getName() == "bi" && $args[0] == "remove") {
-                unset($this->players[0]);
+                $this->player = $s->getName();
             }
         }
         else {
@@ -34,7 +30,7 @@ class Main extends PluginBase implements Listener {
     }
 
     public function onTouch(PlayerInteractEvent $e) {
-        if(in_array($e->getPlayer()->getName(), $this->players)) {
+        if($e->getPlayer()->getName()==$this->player) {
             $e->getPlayer()->sendMessage("§5X: §6{$e->getBlock()->getX()}\n".
                 "§5Y: §6{$e->getBlock()->getY()}\n".
                 "§5Z: §6{$e->getBlock()->getZ()}\n".
