@@ -2,7 +2,7 @@
 
 namespace ServerTransfer;
 
-use pocketmine\network\protocol\TransferPacket;
+use pocketmine\network\mcpe\protocol\TransferPacket;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 
