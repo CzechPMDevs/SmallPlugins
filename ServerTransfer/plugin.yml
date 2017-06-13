@@ -5,6 +5,12 @@ author: GamakCZ
 main: ServerTransfer\Main
 description: Simple Transfer plugin
 
+commands:
+  transfer:
+    description: Transfer player to another server
+    aliases:
+      - servertransfer
+
 permissions:
   st.transfer:
     description: transfer to other servers
