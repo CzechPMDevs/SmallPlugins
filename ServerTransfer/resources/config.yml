@@ -1,0 +1,2 @@
+#Plugin transfer all players to this server on server disable
+disable-server: play.yourserveradress.com
