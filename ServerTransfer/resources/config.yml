@@ -1,2 +1,3 @@
 #Plugin transfer all players to this server on server disable
-disable-server: play.yourserveradress.com
+disable-server-ip: play.yourserveradress.com
+disable-server-port: 19132
