@@ -4,8 +4,8 @@ namespace ServerTransfer;
 
 use pocketmine\network\mcpe\protocol\TransferPacket;
 use pocketmine\Player;
-use pocketmine\Server;
 use pocketmine\plugin\PluginBase;
+use pocketmine\Server;
 
 class Main extends PluginBase {
 
@@ -15,14 +15,11 @@ class Main extends PluginBase {
     public function onEnable() {
         $this->listener = new EventListener($this);
         $this->getServer()->getPluginManager()->registerEvents($this->listener, $this);
-    }
-    
-    public function onDisable(){
-        $players = Server::getInstance()->getOnlinePlayers();
-        if($this->getServer()->isRunning() == false){
-        foreach($players as $p){
-            $this->transfer($p, $this->getConfig()->get("disable-server-ip"), $this->getConfig()->get("disable-server-port"));
+        if(!file_exists($this->getDataFolder())) {
+            @mkdir($this->getDataFolder());
         }
+        if(!is_file($this->getDataFolder()."/config.yml")) {
+            $this->saveResource("/config.yml");
         }
     }
 
@@ -31,5 +28,14 @@ class Main extends PluginBase {
         $pk->address = $ip;
         $pk->port = $port;
         $player->dataPacket($pk);
+    }
+
+    public function onDisable() {
+        $players = Server::getInstance()->getOnlinePlayers();
+        if ($this->getServer()->isRunning() == false) {
+            foreach ($players as $p) {
+                $this->transfer($p, $this->getConfig()->get("disable-server-ip"), intval($this->getConfig()->get("disable-server-port")));
+            }
+        }
     }
 }
