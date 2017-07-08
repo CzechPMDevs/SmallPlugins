@@ -31,9 +31,11 @@ class Main extends PluginBase {
     }
 
     public function onDisable() {
-        foreach(Server::getInstance()->getOnlinePlayers() as $player) {
-            $this->getLogger()->debug($player->getName()." is transfered.");
-            $this->transfer($player, $this->getConfig()->get("disable-server-ip"), intval($this->getConfig()->get("disable-server-port")));
+        $players = Server::getInstance()->getOnlinePlayers();
+        if ($this->getServer()->isRunning() == false) {
+            foreach ($players as $p) {
+                $this->transfer($p, $this->getConfig()->get("disable-server-ip"), intval($this->getConfig()->get("disable-server-port")));
+            }
         }
     }
 }
