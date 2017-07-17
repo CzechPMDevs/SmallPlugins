@@ -17,7 +17,7 @@ class Main extends PluginBase implements Listener {
         $this->getServer()->getPluginManager()->registerEvents($this,$this);
     }
 
-    public function onCommand(CommandSender $s, Command $cmd, $label, array $args) {
+    public function onCommand(CommandSender $s, Command $cmd, $label, array $args):bool {
         if($s instanceof Player && $s->isOp()) {
             if($cmd->getName() == "bi" && $args[0] == "add") {
                 $s->sendMessage("§aSucess.");
