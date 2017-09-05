@@ -17,11 +17,11 @@ class Main extends PluginBase implements Listener {
         $this->getServer()->getPluginManager()->registerEvents($this,$this);
     }
 
-    public function onCommand(CommandSender $s, Command $cmd, $label, array $args):bool {
+    public function onCommand(CommandSender $s, Command $cmd, string $label, array $args):bool {
         if($s instanceof Player && $s->isOp()) {
             if($cmd->getName() == "bi" && $args[0] == "add") {
-                $s->sendMessage("§aSucess.");
-                $this->player = $s->getName();
+                $s->sendMessage("§aSuccessfully added to list.");
+                $this->player[$s->getName()] = 1;
             }
         }
         else {
@@ -30,7 +30,7 @@ class Main extends PluginBase implements Listener {
     }
 
     public function onTouch(PlayerInteractEvent $e) {
-        if($e->getPlayer()->getName()==$this->player) {
+        if(isset($this->player[$e->getPlayer()->getName()])) {
             $e->getPlayer()->sendMessage("§5X: §6{$e->getBlock()->getX()}\n".
                 "§5Y: §6{$e->getBlock()->getY()}\n".
                 "§5Z: §6{$e->getBlock()->getZ()}\n".
