@@ -10,4 +10,6 @@ projects:
     path: UnlimitedSlots/
   BlockInfo:
     path: BlockInfo/
+  SimpleHome:
+    path: SimpleHome/
 ...
