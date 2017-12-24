@@ -22,11 +22,12 @@ class SethomeCommand extends Command {
     private $plugin;
 
     /**
-     * HomeCommand constructor.
+     * SethomeCommand constructor.
+     * @param SimpleHome $plugin
      */
     public function __construct(SimpleHome $plugin) {
-        parent::__construct("home", "Teleport to your home");
-        $this->setPermission("sh.cmd.home");
+        parent::__construct("sethome", "Set home");
+        $this->setPermission("sh.cmd.sethome");
         $this->plugin = $plugin;
     }
 

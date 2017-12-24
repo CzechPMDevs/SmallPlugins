@@ -48,6 +48,19 @@ class SimpleHome extends PluginBase {
         $this->saveData();
     }
 
+    public function getHomeList(Player $player) {
+        if(isset($this->homes[$player->getName()])) {
+            $list = "";
+            foreach ($this->homes[$player->getName()] as $homeName => $homeData) {
+                $list = $list.$homeName.",";
+            }
+            return $list;
+        }
+        else {
+            return "";
+        }
+    }
+
     public function setPlayerHome(Player $player, Home $home) {
         $this->homes[$player->getName()][$home->getName()] = [$home->getX(), $home->getY(), $home->getZ(), $home->getLevel()->getName()];
     }

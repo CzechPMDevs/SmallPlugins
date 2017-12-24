@@ -41,7 +41,7 @@ class HomeCommand extends Command  {
             return false;
         }
         if(empty($args[0])) {
-            $sender->sendMessage($this->getPlugin()->messages["prefix"]." ".$this->getPlugin()->messages["home-usage"]);
+            $sender->sendMessage(str_replace("%1",$this->getPlugin()->getHomeList($sender),$this->getPlugin()->messages["prefix"]." ".$this->getPlugin()->messages["home-list"]));
             return false;
         }
         if(!$this->getPlugin()->getPlayerHome($sender, $args[0])) {

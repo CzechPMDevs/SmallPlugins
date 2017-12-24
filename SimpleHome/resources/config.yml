@@ -12,5 +12,5 @@ sethome-message: '§aHome %1 has been successfully set.'
 sethome-usage: '§cUsage: §7/sethome <home>'
 home-message: '§aYou are successfully teleported to home %1.'
 home-notexists: '§cHome %1 does not exists!'
-home-usage: '§cUsage: §7/home or /home <home>'
+home-list: '§bHomes: §7%1'
 ...
