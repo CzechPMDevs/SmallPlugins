@@ -9,6 +9,7 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use simplehome\commands\HomeCommand;
+use simplehome\commands\SethomeCommand;
 
 /**
  * Class SimpleHome
@@ -81,7 +82,7 @@ class SimpleHome extends PluginBase {
 
     public function registerCommands() {
         $this->commands["home"] = new HomeCommand($this);
-        $this->commands["sethome"] = new HomeCommand($this);
+        $this->commands["sethome"] = new SethomeCommand($this);
         foreach ($this->commands as $command) {
             $this->getServer()->getCommandMap()->register("simplehome", $command);
         }
@@ -113,8 +114,5 @@ class SimpleHome extends PluginBase {
             $this->saveResource("/config.yml");
         }
         $this->messages = $this->getConfig()->getAll();
-        ob_start();
-        var_dump($this->messages);
-        $this->getLogger()->notice(ob_get_clean());
     }
 }
