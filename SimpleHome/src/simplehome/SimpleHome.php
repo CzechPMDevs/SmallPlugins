@@ -112,8 +112,9 @@ class SimpleHome extends PluginBase {
         if(!is_file($this->getDataFolder()."/config.yml")) {
             $this->saveResource("/config.yml");
         }
-        else {
-            $this->messages = $this->getConfig()->getAll();
-        }
+        $this->messages = $this->getConfig()->getAll();
+        ob_start();
+        var_dump($this->messages);
+        $this->getLogger()->notice(ob_get_clean());
     }
 }
