@@ -1,0 +1,20 @@
+name: SimpleHome
+api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10]
+version: 1.0.0
+main: simplehome\simplehome
+author: CzechPMDevs
+authors: [VixikCZ]
+description: Simple home plugin
+website: https://github.com/CzechPMDevs/SmallPlugins/SimpleHome
+
+permissions:
+  sh.cmd:
+    default: true
+    description: Permissions to all SimpleHome commands
+    childern:
+      sh.cmd.sethome:
+        default: true
+        description: Permission for /sethome <home>
+      sh.cmd.home:
+        default: true
+        description: Permission for /home <home>
