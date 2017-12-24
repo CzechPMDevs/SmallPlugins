@@ -5,7 +5,7 @@
 #
 
 # Prefix
-prefix: '&3[SimpleHome]&e'
+prefix: '§3[SimpleHome]§e'
 
 # Messages:
 sethome-message: '§aHome %1 has been successfully set.'
