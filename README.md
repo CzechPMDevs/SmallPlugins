@@ -8,3 +8,5 @@ Repository for small pmmp plugins
 - UnlimitedSlots: https://poggit.pmmp.io/ci/CzechPMDevs/SmallPlugins/UnlimitedSlots
 
 - BlockInfo: https://poggit.pmmp.io/ci/CzechPMDevs/SmallPlugins/BlockInfo
+
+- SimpleHome: https://poggit.pmmp.io/ci/CzechPMDevs/SmallPlugins/SimpleHome
