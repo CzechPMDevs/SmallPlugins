@@ -10,6 +10,8 @@ prefix: '§3[SimpleHome]§e'
 # Messages:
 sethome-message: '§aHome %1 has been successfully set.'
 sethome-usage: '§cUsage: §7/sethome <home>'
+delhome-message: '§aHome %1 has been successfully deleted.'
+delhome-usage: '§cUsage: §7/delhome <home>'
 home-message: '§aYou are successfully teleported to home %1.'
 home-notexists: '§cHome %1 does not exists!'
 home-list: '§bHomes: §7%1'

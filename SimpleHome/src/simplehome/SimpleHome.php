@@ -9,6 +9,7 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use simplehome\commands\HomeCommand;
+use simplehome\commands\RemovehomeCommand;
 use simplehome\commands\SethomeCommand;
 
 /**
@@ -16,6 +17,11 @@ use simplehome\commands\SethomeCommand;
  * @package simplehome
  */
 class SimpleHome extends PluginBase {
+
+    /**
+     * @var SimpleHome $instance
+     */
+    private static $instance;
 
     /**
      * @var array $messages
@@ -33,6 +39,7 @@ class SimpleHome extends PluginBase {
     private $commands = [];
 
     public function onEnable() {
+        self::$instance = $this;
         $this->registerCommands();
         $this->loadData();
         $this->getLogger()->info("\n".
@@ -49,6 +56,10 @@ class SimpleHome extends PluginBase {
         $this->saveData();
     }
 
+    /**
+     * @param Player $player
+     * @return string
+     */
     public function getHomeList(Player $player) {
         if(isset($this->homes[$player->getName()])) {
             $list = "";
@@ -62,6 +73,18 @@ class SimpleHome extends PluginBase {
         }
     }
 
+    /**
+     * @param Player $player
+     * @param Home $home
+     */
+    public function removeHome(Player $player, Home $home) {
+        unset($this->homes[$player->getName()][$home->getName()]);
+    }
+
+    /**
+     * @param Player $player
+     * @param Home $home
+     */
     public function setPlayerHome(Player $player, Home $home) {
         $this->homes[$player->getName()][$home->getName()] = [$home->getX(), $home->getY(), $home->getZ(), $home->getLevel()->getName()];
     }
@@ -81,6 +104,7 @@ class SimpleHome extends PluginBase {
     }
 
     public function registerCommands() {
+        $this->commands["delhome"] = new RemovehomeCommand($this);
         $this->commands["home"] = new HomeCommand($this);
         $this->commands["sethome"] = new SethomeCommand($this);
         foreach ($this->commands as $command) {
@@ -114,5 +138,12 @@ class SimpleHome extends PluginBase {
             $this->saveResource("/config.yml");
         }
         $this->messages = $this->getConfig()->getAll();
+    }
+
+    /**
+     * @return SimpleHome $instance
+     */
+    public static function getInstance(): SimpleHome {
+        return self::$instance;
     }
 }
