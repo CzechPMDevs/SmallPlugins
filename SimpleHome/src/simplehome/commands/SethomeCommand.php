@@ -6,7 +6,9 @@ namespace simplehome\commands;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\Player;
+use pocketmine\plugin\Plugin;
 use simplehome\Home;
 use simplehome\SimpleHome;
 
@@ -14,7 +16,7 @@ use simplehome\SimpleHome;
  * Class SethomeCommand
  * @package simplehome\commands
  */
-class SethomeCommand extends Command {
+class SethomeCommand extends Command implements PluginIdentifiableCommand {
 
     /**
      * @var SimpleHome $plugin
@@ -52,9 +54,9 @@ class SethomeCommand extends Command {
     }
 
     /**
-     * @return SimpleHome $plugin
+     * @return SimpleHome|Plugin $plugin
      */
-    public function getPlugin():SimpleHome {
+    public function getPlugin():Plugin {
         return $this->plugin;
     }
 }

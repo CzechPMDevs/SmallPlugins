@@ -1,6 +1,6 @@
 # SimpleHome
 
-_**The easiest plugin to create virtual homes.**_
+_**The easiest plugin to create and edit virtual homes.**_
 
 ### Phar Download:
 

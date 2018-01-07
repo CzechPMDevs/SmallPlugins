@@ -92,9 +92,9 @@ class SimpleHome extends PluginBase {
     /**
      * @param Player $player
      * @param string $home
-     * @return Home
+     * @return Home|bool
      */
-    public function getPlayerHome(Player $player, string $home):Home {
+    public function getPlayerHome(Player $player, string $home) {
         if(isset($this->homes[$player->getName()][$home])) {
             return new Home($player, $this->homes[$player->getName()][$home], $home);
         }
