@@ -41,7 +41,7 @@ final class Home extends Position {
      * @param $player
      * @return Home
      */
-    public static function __fromPosition(Position $position, $name, $player):Home {
+    public static function fromPosition(Position $position, $name, $player):Home {
         return new Home($player, [intval($position->getX()), intval($position->getY()), intval($position->getZ()), $position->getLevel()->getName()], $name);
     }
 
