@@ -12,4 +12,6 @@ projects:
     path: BlockInfo/
   SimpleHome:
     path: SimpleHome/
+  BankPlugin:
+    path: BankPlugin/
 ...
