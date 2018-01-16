@@ -38,7 +38,7 @@ class BankPlugin extends PluginBase implements Listener {
                 BankPlugin::$instance->check();
             }
         };
-        $this->getServer()->getScheduler()->scheduleRepeatingTask($this->refreshTask, 20*10);
+        $this->getServer()->getScheduler()->scheduleRepeatingTask($this->refreshTask, 20*10*60);
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
