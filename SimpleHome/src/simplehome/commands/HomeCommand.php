@@ -43,15 +43,15 @@ class HomeCommand extends Command implements PluginIdentifiableCommand {
             return false;
         }
         if(empty($args[0])) {
-            $sender->sendMessage(str_replace("%1",$this->getPlugin()->getHomeList($sender),$this->getPlugin()->messages["prefix"]." ".$this->getPlugin()->messages["home-list"]));
+            $sender->sendMessage($this->getPlugin()->getPrefix().$this->getPlugin()->getDisplayHomeList($sender));
             return false;
         }
         if(!$this->getPlugin()->getPlayerHome($sender, $args[0])) {
-            $sender->sendMessage(str_replace("%1", $args[0],$this->getPlugin()->messages["prefix"]." ".$this->getPlugin()->messages["home-notexists"]));
+            $sender->sendMessage($this->getPlugin()->getPrefix().str_replace("%1", $args[0],$this->getPlugin()->messages["home-notexists"]));
             return false;
         }
         $this->getPlugin()->getPlayerHome($sender, $args[0])->teleport($sender);
-        $sender->sendMessage(str_replace("%1", $args[0],$this->getPlugin()->messages["prefix"]." ".$this->getPlugin()->messages["home-message"]));
+        $sender->sendMessage($this->getPlugin()->getPrefix().str_replace("%1", $args[0],$this->getPlugin()->messages["home-message"]));
         return false;
     }
 

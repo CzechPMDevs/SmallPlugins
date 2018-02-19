@@ -7,6 +7,7 @@ namespace simplehome;
 use pocketmine\level\Position;
 use pocketmine\Player;
 use pocketmine\Server;
+use simplehome\event\PlayerHomeTeleportEvent;
 
 /**
  * Class Home
@@ -36,9 +37,12 @@ final class Home extends Position {
     }
 
     /**
+     * @api
+     *
      * @param Position $position
      * @param $name
      * @param $player
+     *
      * @return Home
      */
     public static function fromPosition(Position $position, $name, $player):Home {
@@ -46,6 +50,8 @@ final class Home extends Position {
     }
 
     /**
+     * @api
+     *
      * @return string
      */
     public final function getName():string {
@@ -53,13 +59,23 @@ final class Home extends Position {
     }
 
     /**
+     * @api
+     *
      * @param Player $player
      */
     public final function teleport(Player $player) {
-        $player->teleport($this->asPosition());
+        $event = new PlayerHomeTeleportEvent($player, $this);
+
+        $player->getServer()->getPluginManager()->callEvent($event);
+
+        if(!$event->isCancelled()) {
+            $player->teleport($this->asPosition());
+        }
     }
 
     /**
+     * @api
+     *
      * @return Player
      */
     public final function getOwner():Player {

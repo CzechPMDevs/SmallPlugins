@@ -1,5 +1,5 @@
 name: SimpleHome
-api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10]
+api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10, 3.0.0-ALPHA11]
 version: 1.0.0
 main: simplehome\SimpleHome
 author: CzechPMDevs
@@ -18,3 +18,6 @@ permissions:
       sh.cmd.home:
         default: true
         description: Permission for /home <home>
+      sh.cmd.delhome:
+        default: true
+        description: Permission for /delhome <home>

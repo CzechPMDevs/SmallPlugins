@@ -48,7 +48,7 @@ class SimpleHome extends PluginBase {
             "§o§9Simple home plugin.\n".
             "§aAuthors: §7VixikCZ\n".
             "§aVersion: §7".$this->getDescription()->getVersion()."\n".
-            "§aStatus: §7Loading...\n".
+            "§aStatus: §7Loaded!\n".
             "§c--------------------------------");
     }
 
@@ -57,23 +57,46 @@ class SimpleHome extends PluginBase {
     }
 
     /**
+     * @api
+     *
      * @param Player $player
-     * @return string
+     *
+     * @return array
      */
-    public function getHomeList(Player $player) {
-        if(isset($this->homes[$player->getName()])) {
-            $list = "";
-            foreach ($this->homes[$player->getName()] as $homeName => $homeData) {
-                $list = $list.$homeName.",";
-            }
-            return $list;
+    public function getHomeList(Player $player): array {
+        $list = [];
+
+        foreach ($this->homes[$player->getName()] as $homeName => $homeData) {
+            array_push($list, $homeName);
         }
-        else {
-            return "";
-        }
+
+        return $list;
     }
 
     /**
+     * @api
+     *
+     * @param Player $player
+     *
+     * @return string
+     */
+    public function getDisplayHomeList(Player $player): string {
+        $list = $this->getHomeList($player);
+
+        if(count($list) == 0) {
+            return $this->messages["no-home"];
+        }
+
+        $msg = $this->messages["home-list"];
+        $msg = str_replace("%1", strval(count($list)), $msg);
+        $msg = str_replace("%2", implode(", ", $list), $msg);
+
+        return $msg;
+    }
+
+    /**
+     * @api
+     *
      * @param Player $player
      * @param Home $home
      */
@@ -82,6 +105,8 @@ class SimpleHome extends PluginBase {
     }
 
     /**
+     * @api
+     *
      * @param Player $player
      * @param Home $home
      */
@@ -90,8 +115,11 @@ class SimpleHome extends PluginBase {
     }
 
     /**
+     * @api
+     *
      * @param Player $player
      * @param string $home
+     *
      * @return Home|bool
      */
     public function getPlayerHome(Player $player, string $home) {
@@ -141,6 +169,15 @@ class SimpleHome extends PluginBase {
     }
 
     /**
+     * @return string $prefix
+     */
+    public function getPrefix(): string {
+        return strval(end(str_split($this->messages["prefix"]))) === " " ? $this->messages["prefix"] : $this->messages["prefix"]." ";
+    }
+
+    /**
+     * @api
+     *
      * @return SimpleHome $instance
      */
     public static function getInstance(): SimpleHome {

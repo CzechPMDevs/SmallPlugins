@@ -45,11 +45,11 @@ class SethomeCommand extends Command implements PluginIdentifiableCommand {
             return false;
         }
         if(empty($args[0])) {
-            $sender->sendMessage($this->getPlugin()->messages["prefix"]." ".$this->getPlugin()->messages["sethome-usage"]);
+            $sender->sendMessage($this->getPlugin()->getPrefix().$this->getPlugin()->messages["sethome-usage"]);
             return false;
         }
         $this->getPlugin()->setPlayerHome($sender, Home::fromPosition($sender->asPosition(), $args[0], $sender));
-        $sender->sendMessage(str_replace("%1", $args[0],$this->getPlugin()->messages["prefix"]." ".$this->getPlugin()->messages["sethome-message"]));
+        $sender->sendMessage($this->getPlugin()->getPrefix().str_replace("%1", $args[0],$this->getPlugin()->messages["sethome-message"]));
         return false;
     }
 

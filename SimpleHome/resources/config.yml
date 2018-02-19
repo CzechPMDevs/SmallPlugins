@@ -14,5 +14,6 @@ delhome-message: '§aHome %1 has been successfully deleted.'
 delhome-usage: '§cUsage: §7/delhome <home>'
 home-message: '§aYou are successfully teleported to home %1.'
 home-notexists: '§cHome %1 does not exists!'
-home-list: '§bHomes: §7%1'
+home-list: '§bHomes (%1): §7%2'
+no-home: '§cYou have not homes'
 ...
