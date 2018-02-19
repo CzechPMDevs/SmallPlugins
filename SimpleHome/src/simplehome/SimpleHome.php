@@ -172,7 +172,7 @@ class SimpleHome extends PluginBase {
      * @return string $prefix
      */
     public function getPrefix(): string {
-        return strval(end(str_split($this->messages["prefix"]))) === " " ? $this->messages["prefix"] : $this->messages["prefix"]." ";
+        return $this->messages["prefix"]." ";
     }
 
     /**
