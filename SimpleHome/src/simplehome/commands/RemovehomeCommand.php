@@ -48,6 +48,10 @@ class RemovehomeCommand extends Command implements PluginIdentifiableCommand {
             $sender->sendMessage($this->getPlugin()->getPrefix().$this->getPlugin()->messages["delhome-usage"]);
             return false;
         }
+        if(in_array($args[0], $this->getPlugin()->getHomeList($sender))) {
+            $sender->sendMessage($this->getPlugin()->getPrefix().str_replace("%1", $args[0], $this->getPlugin()->messages["home-notexists"]));
+            return false;
+        }
         $this->getPlugin()->removeHome($sender, Home::fromPosition($sender->asPosition(), $args[0], $sender));
         $sender->sendMessage(str_replace("%1", $args[0],$this->getPlugin()->getPrefix().$this->getPlugin()->messages["delhome-message"]));
         return false;
