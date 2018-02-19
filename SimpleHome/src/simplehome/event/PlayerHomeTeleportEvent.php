@@ -15,6 +15,9 @@ use simplehome\Home;
  */
 class PlayerHomeTeleportEvent extends PluginEvent implements Cancellable {
 
+    /** @var null $handlerList */
+    public static $handlerList = \null;
+
     /** @var Player $owner */
     protected $owner;
 
