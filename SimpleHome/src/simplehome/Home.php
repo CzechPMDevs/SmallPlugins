@@ -29,6 +29,7 @@ final class Home extends Position {
      * Home constructor.
      * @param Player $player
      * @param array $data
+     * @param string $name
      */
     public function __construct(Player $player, array $data, string $name) {
         parent::__construct(intval($data[0]), intval($data[1]), intval($data[2]), Server::getInstance()->getLevelByName(strval($data[3])));
