@@ -32,7 +32,7 @@ final class Home extends Position {
      * @param string $name
      */
     public function __construct(Player $player, array $data, string $name) {
-        parent::__construct(intval($data[0]), intval($data[1]), intval($data[2]), Server::getInstance()->getLevelByName(strval($data[3])));
+        parent::__construct((int)$data[0], (int)$data[1], (int)$data[2], Server::getInstance()->getLevelByName((string)$data[3]));
         $this->owner = $player;
         $this->name = $name;
     }
@@ -47,7 +47,7 @@ final class Home extends Position {
      * @return Home
      */
     public static function fromPosition(Position $position, $name, $player):Home {
-        return new Home($player, [intval($position->getX()), intval($position->getY()), intval($position->getZ()), $position->getLevel()->getName()], $name);
+        return new Home($player, [(int)$position->getX(), (int)$position->getY(), (int)$position->getZ(), $position->getLevel()->getName()], $name);
     }
 
     /**

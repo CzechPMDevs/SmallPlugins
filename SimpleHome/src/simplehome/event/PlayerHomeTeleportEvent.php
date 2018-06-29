@@ -37,7 +37,7 @@ class PlayerHomeTeleportEvent extends PluginEvent implements Cancellable {
     /**
      * @api
      *
-     * @return Player
+     * @return Player $player
      */
     public function getPlayer() {
         return $this->owner;
@@ -46,7 +46,7 @@ class PlayerHomeTeleportEvent extends PluginEvent implements Cancellable {
     /**
      * @api
      *
-     * @return Home
+     * @return Home $home
      */
     public function getHome(): Home {
         return $this->home;

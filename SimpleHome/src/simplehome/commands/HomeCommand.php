@@ -42,7 +42,7 @@ class HomeCommand extends Command implements PluginIdentifiableCommand {
             $sender->sendMessage("This command can be used only in-game!");
             return false;
         }
-        if(empty($args[0])) {
+        if(!isset($args[0])) {
             $sender->sendMessage($this->getPlugin()->getPrefix().$this->getPlugin()->getDisplayHomeList($sender));
             return false;
         }

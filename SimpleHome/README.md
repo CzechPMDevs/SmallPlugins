@@ -2,10 +2,6 @@
 
 _**The easiest plugin to create and edit virtual homes.**_
 
-### Phar Download:
-
-- SimpleHome v1.0.0:
-
 ### Commands:
 
 - Sethome Command:

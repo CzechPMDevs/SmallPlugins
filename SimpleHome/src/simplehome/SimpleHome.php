@@ -42,14 +42,6 @@ class SimpleHome extends PluginBase {
         self::$instance = $this;
         $this->registerCommands();
         $this->loadData();
-        $this->getLogger()->info("\n".
-            "§c--------------------------------\n".
-            "§6§lCzechPMDevs §r§e>>> §bSimpleHome\n".
-            "§o§9Simple home plugin.\n".
-            "§aAuthors: §7VixikCZ\n".
-            "§aVersion: §7".$this->getDescription()->getVersion()."\n".
-            "§aStatus: §7Loaded!\n".
-            "§c--------------------------------");
     }
 
     public function onDisable() {
@@ -88,7 +80,7 @@ class SimpleHome extends PluginBase {
         }
 
         $msg = $this->messages["home-list"];
-        $msg = str_replace("%1", strval(count($list)), $msg);
+        $msg = str_replace("%1", (string)count($list), $msg);
         $msg = str_replace("%2", implode(", ", $list), $msg);
 
         return $msg;
@@ -111,6 +103,12 @@ class SimpleHome extends PluginBase {
      * @param Home $home
      */
     public function setPlayerHome(Player $player, Home $home) {
+        if($this->messages["limit"] != -1) {
+            if(count($this->getHomeList($player)) >= $this->messages["limit"]) {
+                $player->sendMessage(str_replace("%1", $home->getName(), $this->messages["maxHomes"]));
+                return;
+            }
+        }
         $this->homes[$player->getName()][$home->getName()] = [$home->getX(), $home->getY(), $home->getZ(), $home->getLevel()->getName()];
     }
 

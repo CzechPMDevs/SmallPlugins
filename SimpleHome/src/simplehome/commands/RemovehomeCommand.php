@@ -18,9 +18,7 @@ use simplehome\SimpleHome;
  */
 class RemovehomeCommand extends Command implements PluginIdentifiableCommand {
 
-    /**
-     * @var SimpleHome $plugin
-     */
+    /** @var SimpleHome $plugin */
     private $plugin;
 
     /**
@@ -44,7 +42,7 @@ class RemovehomeCommand extends Command implements PluginIdentifiableCommand {
             $sender->sendMessage("This command can be used only in-game!");
             return false;
         }
-        if(empty($args[0])) {
+        if(!isset($args[0])) {
             $sender->sendMessage($this->getPlugin()->getPrefix().$this->getPlugin()->messages["delhome-usage"]);
             return false;
         }

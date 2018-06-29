@@ -1,5 +1,5 @@
 name: SimpleHome
-api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10, 3.0.0-ALPHA11, 3.0.0-ALPHA12]
+api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10, 3.0.0-ALPHA11, 3.0.0-ALPHA12, 3.0.0]
 version: 1.0.2
 main: simplehome\SimpleHome
 author: CzechPMDevs
@@ -8,6 +8,9 @@ description: Simple home plugin
 website: https://github.com/CzechPMDevs/SmallPlugins/SimpleHome
 
 permissions:
+  sh.limit:
+    default: op
+    description: Allows have count of unlimited homes
   sh.cmd:
     default: true
     description: Permissions to all SimpleHome commands
