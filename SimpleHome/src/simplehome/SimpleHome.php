@@ -58,8 +58,12 @@ class SimpleHome extends PluginBase {
     public function getHomeList(Player $player): array {
         $list = [];
 
+        if(!isset($this->homes[$player->getName()])) {
+            $this->homes[$player->getName()] = [];
+        }
+
         foreach ($this->homes[$player->getName()] as $homeName => $homeData) {
-            array_push($list, $homeName);
+            $list[] = $homeName;
         }
 
         return $list;
@@ -104,8 +108,8 @@ class SimpleHome extends PluginBase {
      */
     public function setPlayerHome(Player $player, Home $home) {
         if($this->messages["limit"] != -1) {
-            if(count($this->getHomeList($player)) >= $this->messages["limit"]) {
-                $player->sendMessage(str_replace("%1", $home->getName(), $this->messages["maxHomes"]));
+            if(count($this->getHomeList($player)) > $this->messages["limit"]) {
+                $player->sendMessage(str_replace("%1", $home->getName(), $this->messages["sethome-max"]));
                 return;
             }
         }
