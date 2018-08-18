@@ -32,6 +32,9 @@ final class Home extends Position {
      * @param string $name
      */
     public function __construct(Player $player, array $data, string $name) {
+        if(!$player->getServer()->isLevelLoaded((string)$data[3])) {
+            $player->getServer()->loadLevel((string)$data[3]);
+        }
         parent::__construct((int)$data[0], (int)$data[1], (int)$data[2], Server::getInstance()->getLevelByName((string)$data[3]));
         $this->owner = $player;
         $this->name = $name;

@@ -18,24 +18,16 @@ use simplehome\commands\SethomeCommand;
  */
 class SimpleHome extends PluginBase {
 
-    /**
-     * @var SimpleHome $instance
-     */
+    /** @var SimpleHome $instance */
     private static $instance;
 
-    /**
-     * @var array $messages
-     */
+    /** @var array $messages */
     public $messages = [];
 
-    /**
-     * @var array $homes
-     */
+    /** @var array $homes */
     public $homes = [];
 
-    /**
-     * @var Command[] $commands;
-     */
+    /** @var Command[] $commands */
     private $commands = [];
 
     public function onEnable() {
