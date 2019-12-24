@@ -14,4 +14,6 @@ projects:
     path: SimpleHome/
   BankPlugin:
     path: BankPlugin/
+  Snow:
+    path: Snow/
 ...
