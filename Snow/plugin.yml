@@ -1,0 +1,6 @@
+name: Snow
+author: VixikCZ
+api: 3.0.0
+version: 1.0.0
+main: vixikhd\snow\Snow
+description: It will snow in almost all the levels!
