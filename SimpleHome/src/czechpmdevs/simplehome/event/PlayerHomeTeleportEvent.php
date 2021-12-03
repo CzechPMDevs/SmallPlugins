@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (C) 2018-2019  CzechPMDevs
+ * Copyright (C) 2018-2021  CzechPMDevs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,51 +20,34 @@ declare(strict_types=1);
 
 namespace czechpmdevs\simplehome\event;
 
-use pocketmine\event\Cancellable;
-use pocketmine\event\plugin\PluginEvent;
-use pocketmine\Player;
 use czechpmdevs\simplehome\Home;
+use pocketmine\event\Cancellable;
+use pocketmine\event\CancellableTrait;
+use pocketmine\event\plugin\PluginEvent;
+use pocketmine\player\Player;
 
-/**
- * Class PlayerHomeTeleportEvent
- * @package simplehome\event
- */
 class PlayerHomeTeleportEvent extends PluginEvent implements Cancellable {
+	use CancellableTrait;
 
-    /** @var null $handlerList */
-    public static $handlerList = \null;
+	protected Player $owner;
+	protected Home $home;
 
-    /** @var Player $owner */
-    protected $owner;
+	public function __construct(Player $owner, Home $home) {
+		$this->owner = $owner;
+		$this->home = $home;
+	}
 
-    /** @var Home $home */
-    protected $home;
+	/**
+	 * @return Player Returns owner of the home
+	 */
+	public function getPlayer(): Player {
+		return $this->owner;
+	}
 
-    /**
-     * PlayerHomeTeleportEvent constructor.
-     * @param Player $owner
-     * @param Home $home
-     */
-    public function __construct(Player $owner, Home $home) {
-        $this->owner = $owner;
-        $this->home = $home;
-    }
-
-    /**
-     * @api
-     *
-     * @return Player $player
-     */
-    public function getPlayer() {
-        return $this->owner;
-    }
-
-    /**
-     * @api
-     *
-     * @return Home $home
-     */
-    public function getHome(): Home {
-        return $this->home;
-    }
+	/**
+	 * @return Home Returns Home player was teleported to
+	 */
+	public function getHome(): Home {
+		return $this->home;
+	}
 }

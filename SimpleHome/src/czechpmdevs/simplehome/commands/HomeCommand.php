@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (C) 2018-2019  CzechPMDevs
+ * Copyright (C) 2018-2021  CzechPMDevs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,61 +20,44 @@ declare(strict_types=1);
 
 namespace czechpmdevs\simplehome\commands;
 
+use czechpmdevs\simplehome\SimpleHome;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
-use czechpmdevs\simplehome\SimpleHome;
+use pocketmine\plugin\PluginOwned;
+use function str_replace;
 
-/**
- * Class HomeCommand
- * @package simplehome\commands
- */
-class HomeCommand extends Command implements PluginIdentifiableCommand {
+class HomeCommand extends Command implements PluginOwned {
 
-    /**
-     * @var SimpleHome $plugin
-     */
-    private $plugin;
+	private SimpleHome $plugin;
 
-    /**
-     * HomeCommand constructor.
-     */
-    public function __construct(SimpleHome $plugin) {
-        parent::__construct("home", "Teleport to your home");
-        $this->setPermission("sh.cmd.home");
-        $this->plugin = $plugin;
-    }
+	public function __construct(SimpleHome $plugin) {
+		parent::__construct("home", "Teleport to your home");
+		$this->setPermission("simplehome.command.home");
 
-    /**
-     * @param CommandSender $sender
-     * @param string $commandLabel
-     * @param array $args
-     * @return bool
-     */
-    public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        if(!$sender instanceof Player) {
-            $sender->sendMessage("This command can be used only in-game!");
-            return false;
-        }
-        if(!isset($args[0])) {
-            $sender->sendMessage($this->getPlugin()->getPrefix().$this->getPlugin()->getDisplayHomeList($sender));
-            return false;
-        }
-        if(!$this->getPlugin()->getPlayerHome($sender, $args[0])) {
-            $sender->sendMessage($this->getPlugin()->getPrefix().str_replace("%1", $args[0],$this->getPlugin()->messages["home-notexists"]));
-            return false;
-        }
-        $this->getPlugin()->getPlayerHome($sender, $args[0])->teleport($sender);
-        $sender->sendMessage($this->getPlugin()->getPrefix().str_replace("%1", $args[0],$this->getPlugin()->messages["home-message"]));
-        return false;
-    }
+		$this->plugin = $plugin;
+	}
 
-    /**
-     * @return SimpleHome|Plugin $plugin
-     */
-    public function getPlugin():Plugin {
-        return $this->plugin;
-    }
+	public function execute(CommandSender $sender, string $commandLabel, array $args) {
+		if(!$sender instanceof Player) {
+			$sender->sendMessage("This command can be used only in-game!");
+			return false;
+		}
+		if(!isset($args[0])) {
+			$sender->sendMessage($this->plugin->getPrefix() . $this->plugin->getDisplayHomeList($sender));
+			return false;
+		}
+		if(!$this->plugin->getPlayerHome($sender, $args[0])) {
+			$sender->sendMessage($this->plugin->getPrefix() . str_replace("%1", $args[0], $this->plugin->messages["home-notexists"]));
+			return false;
+		}
+		$this->plugin->getPlayerHome($sender, $args[0])->teleport($sender);
+		$sender->sendMessage($this->plugin->getPrefix() . str_replace("%1", $args[0], $this->plugin->messages["home-message"]));
+		return false;
+	}
+
+	public function getOwningPlugin(): Plugin {
+		return $this->plugin;
+	}
 }

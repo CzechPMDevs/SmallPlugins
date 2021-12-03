@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (C) 2018-2019  CzechPMDevs
+ * Copyright (C) 2018-2021  CzechPMDevs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,86 +20,48 @@ declare(strict_types=1);
 
 namespace czechpmdevs\simplehome;
 
-use pocketmine\level\Position;
-use pocketmine\Player;
-use pocketmine\Server;
 use czechpmdevs\simplehome\event\PlayerHomeTeleportEvent;
+use pocketmine\player\Player;
+use pocketmine\Server;
+use pocketmine\world\Position;
 
-/**
- * Class Home
- * @package simplehome
- */
 final class Home extends Position {
 
-    /**
-     * @var Player $owner
-     */
-    private $owner;
+	private Player $owner;
+	private string $name;
 
-    /**
-     * @var string $name
-     */
-    private $name;
+	/**
+	 * @phpstan-param array{0: int, 1: int, 2: int, 3: string} $data
+	 */
+	public function __construct(Player $player, array $data, string $name) {
+		if(!$player->getServer()->getWorldManager()->isWorldLoaded((string)$data[3])) {
+			$player->getServer()->getWorldManager()->loadWorld((string)$data[3]);
+		}
+		parent::__construct((int)$data[0], (int)$data[1], (int)$data[2], Server::getInstance()->getWorldManager()->getWorldByName((string)$data[3]));
+		$this->owner = $player;
+		$this->name = $name;
+	}
 
-    /**
-     * Home constructor.
-     * @param Player $player
-     * @param array $data
-     * @param string $name
-     */
-    public function __construct(Player $player, array $data, string $name) {
-        if(!$player->getServer()->isLevelLoaded((string)$data[3])) {
-            $player->getServer()->loadLevel((string)$data[3]);
-        }
-        parent::__construct((int)$data[0], (int)$data[1], (int)$data[2], Server::getInstance()->getLevelByName((string)$data[3]));
-        $this->owner = $player;
-        $this->name = $name;
-    }
+	public static function fromPosition(Position $position, string $name, Player $player): Home {
+		return new Home($player, [(int)$position->getX(), (int)$position->getY(), (int)$position->getZ(), $position->getWorld()->getFolderName()], $name);
 
-    /**
-     * @api
-     *
-     * @param Position $position
-     * @param $name
-     * @param $player
-     *
-     * @return Home
-     */
-    public static function fromPosition(Position $position, $name, $player): Home {
-        return new Home($player, [(int)$position->getX(), (int)$position->getY(), (int)$position->getZ(), $position->getLevel()->getFolderName()], $name);
+	}
 
-    }
+	public final function getName(): string {
+		return $this->name;
+	}
 
-    /**
-     * @api
-     *
-     * @return string
-     */
-    public final function getName():string {
-        return $this->name;
-    }
+	public final function teleport(Player $player): void {
+		$event = new PlayerHomeTeleportEvent($player, $this);
 
-    /**
-     * @api
-     *
-     * @param Player $player
-     */
-    public final function teleport(Player $player) {
-        $event = new PlayerHomeTeleportEvent($player, $this);
+		$event->call();
 
-        $player->getServer()->getPluginManager()->callEvent($event);
+		if(!$event->isCancelled()) {
+			$player->teleport($this->asPosition());
+		}
+	}
 
-        if(!$event->isCancelled()) {
-            $player->teleport($this->asPosition());
-        }
-    }
-
-    /**
-     * @api
-     *
-     * @return Player
-     */
-    public final function getOwner():Player {
-        return $this->owner;
-    }
+	public final function getOwner(): Player {
+		return $this->owner;
+	}
 }
