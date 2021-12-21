@@ -10,10 +10,24 @@ prefix: '§3[SimpleHome]§e'
 # Limit of homes per player (-1 = no limit)
 limit: -1
 
+# Force using numeric alphabet
+enforce-alphanumeric-names: false
+
+# Blacklisted names
+blacklisted-names:
+  - fuck
+  - shit
+
+# Maximum name length of the home (0 = no limit)
+max-name-length: 16
+
 # Messages:
 sethome-message: '§aHome %1 has been successfully set.'
 sethome-usage: '§cUsage: §7/sethome <home>'
 sethome-max: '§cHome %1 can be set. You have reached the maximum number of homes.'
+sethome-alphanumeric-only: "§cHome name must consist only of alphanumeric characters."
+sethome-name-blacklisted: "§cThe name %1 is blacklisted."
+sethome-name-too-long: "§cThe name %1 exceeds the maximum character limit."
 delhome-message: '§aHome %1 has been successfully deleted.'
 delhome-usage: '§cUsage: §7/delhome <home>'
 home-message: '§aYou are successfully teleported to home %1.'

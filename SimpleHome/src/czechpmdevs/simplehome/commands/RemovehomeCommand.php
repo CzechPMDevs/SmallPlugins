@@ -27,6 +27,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\plugin\PluginOwned;
+use function in_array;
 use function str_replace;
 
 class RemovehomeCommand extends Command implements PluginOwned {
