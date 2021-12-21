@@ -46,27 +46,26 @@ class SethomeCommand extends Command implements PluginOwned {
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if(!$sender instanceof Player) {
 			$sender->sendMessage("This command can be used only in-game!");
-			return false;
+			return;
 		}
 		if(empty($args[0])) {
 			$sender->sendMessage($this->plugin->getPrefix() . $this->plugin->messages["sethome-usage"]);
-			return false;
+			return;
 		}
-		if ($this->plugin->getConfig()->get("enforce-alphanumeric-names", false) && !ctype_alnum($args[0])) {
+		if($this->plugin->messages["enforce-alphanumeric-names"] && !ctype_alnum($args[0])) {
 			$sender->sendMessage($this->plugin->getPrefix() . str_replace("%1", $args[0], $this->plugin->messages["sethome-alphanumeric-only"]));
 			return;
 		}
-		if (in_array(strtolower($args[0]), $this->plugin->getConfig()->get("blacklisted-names", []), true)) {
+		if(in_array(strtolower($args[0]), [$this->plugin->messages["blacklisted-names"]], true)) {
 			$sender->sendMessage($this->plugin->getPrefix() . str_replace("%1", $args[0], $this->plugin->messages["sethome-name-blacklisted"]));
 			return;
 		}
-		if (strlen($args[0]) > $this->plugin->getConfig()->get("max-name-length", 16)) {
+		if(strlen($args[0]) > $this->plugin->messages["max-name-length"]) {
 			$sender->sendMessage($this->plugin->getPrefix() . str_replace("%1", $args[0], $this->plugin->messages["sethome-name-too-long"]));
 			return;
 		}
 		$this->plugin->setPlayerHome($sender, Home::fromPosition($sender->getPosition(), $args[0], $sender));
 		$sender->sendMessage($this->plugin->getPrefix() . str_replace("%1", $args[0], $this->plugin->messages["sethome-message"]));
-		return false;
 	}
 
 	public function getOwningPlugin(): Plugin {

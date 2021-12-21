@@ -42,19 +42,18 @@ class HomeCommand extends Command implements PluginOwned {
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if(!$sender instanceof Player) {
 			$sender->sendMessage("This command can be used only in-game!");
-			return false;
+			return;
 		}
 		if(!isset($args[0])) {
 			$sender->sendMessage($this->plugin->getPrefix() . $this->plugin->getDisplayHomeList($sender));
-			return false;
+			return;
 		}
 		if(!$this->plugin->getPlayerHome($sender, $args[0])) {
 			$sender->sendMessage($this->plugin->getPrefix() . str_replace("%1", $args[0], $this->plugin->messages["home-notexists"]));
-			return false;
+			return;
 		}
 		$this->plugin->getPlayerHome($sender, $args[0])->teleport($sender);
 		$sender->sendMessage($this->plugin->getPrefix() . str_replace("%1", $args[0], $this->plugin->messages["home-message"]));
-		return false;
 	}
 
 	public function getOwningPlugin(): Plugin {

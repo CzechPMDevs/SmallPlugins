@@ -43,19 +43,18 @@ class RemovehomeCommand extends Command implements PluginOwned {
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
 		if(!$sender instanceof Player) {
 			$sender->sendMessage("This command can be used only in-game!");
-			return false;
+			return;
 		}
 		if(!isset($args[0])) {
 			$sender->sendMessage($this->plugin->getPrefix() . $this->plugin->messages["delhome-usage"]);
-			return false;
+			return;
 		}
-		if(!in_array($args[0], $this->plugin->getHomeList($sender))) {
+		if(!in_array($args[0], $this->plugin->getHomeList($sender), true)) {
 			$sender->sendMessage($this->plugin->getPrefix() . str_replace("%1", $args[0], $this->plugin->messages["home-notexists"]));
-			return false;
+			return;
 		}
 		$this->plugin->removeHome($sender, Home::fromPosition($sender->getPosition(), $args[0], $sender));
 		$sender->sendMessage(str_replace("%1", $args[0], $this->plugin->getPrefix() . $this->plugin->messages["delhome-message"]));
-		return false;
 	}
 
 	public function getOwningPlugin(): Plugin {
